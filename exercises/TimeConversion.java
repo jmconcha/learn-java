@@ -3,31 +3,20 @@ import java.util.Scanner;
 public class TimeConversion {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int noon = 1200;
-        int time;
+        int hr, min, time;
 
         while (true) {
             System.out.print("Enter time: ");
             time = scanner.nextInt();
+            
+            min = time % 100;
+            hr = time / 100;
 
-
-            if (time < noon) {
-                if (time < 59) {
-                    System.out.println("12:" + time + " AM");
-                } else {
-                    int hours = time / 100;
-                    int minutes = time % 100;
-                    System.out.println(hours + ":" + minutes + " AM");
-                }
+            
+            if (hr > 12) {
+              System.out.printf("%02d:%02d PM%n", hr - 12, min);
             } else {
-                int diff = time - noon;
-                if (diff < 59) {
-                    System.out.println("12:" + diff + " PM");
-                } else {
-                    int temp = diff / 100;
-                    int minutes = diff % 100;
-                    System.out.println(temp / 100 + ":" + minutes + " PM");
-                }
+              System.out.printf("%02d:%02d %s%n", hr, min, hr == 12 ? "PM" : "AM");
             }
         }
     }
